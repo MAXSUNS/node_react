@@ -1,20 +1,19 @@
 {
-  "name": "node-wechat",
-  "version": "0.0.0",
-  "private": true,
+  "name": "wechat-node",
+  "version": "1.0.0",
+  "description": "for wechat",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "body-parser": "~1.16.0",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.0",
-    "express": "~4.14.1",
-    "jade": "~1.11.0",
-    "morgan": "~1.7.0",
-    "nodemailer": "^3.1.3",
-    "serve-favicon": "~2.3.2",
-    "wechat": "^2.1.0",
-    "wx_jsapi_sign": "^1.0.4"
-  }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MAXSUNS/node_react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MAXSUNS/node_react/issues"
+  },
+  "homepage": "https://github.com/MAXSUNS/node_react"
 }
