@@ -1,5 +1,5 @@
 {
-  "name": "wechat-node",
+  "name": "wechat",
   "version": "1.0.0",
   "description": "for wechat",
   "main": "index.js",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/MAXSUNS/node_react/issues"
   },
-  "homepage": "https://github.com/MAXSUNS/node_react"
+  "homepage": "https://github.com/MAXSUNS/node_react",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
 }
