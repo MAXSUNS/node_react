@@ -1,3 +1,5 @@
+const log4js = require('../utils/log4js');
+const logger = log4js.getLogger();
 var express = require('express');
 var router = express.Router();
 var wechat = require('wechat');
@@ -6,8 +8,8 @@ const config = require('../config');
 var Utils = require('../utils/utils')
 /* GET home page. */
 router.get('/wechat', function(req, res, next) {
-  result=Utils.getSignature(config,req.query)
-  res.send(result);
+  var resl=Utils.getSignature(config,req.query)
+  res.send(resl);
   console.log('初始化获取accessToken失败')
 });
 
@@ -15,7 +17,6 @@ router.post('/wechat', wechat(config, wechat.text(function (message, req, res, n
       //------------------------------------------------------------------------
       var message = req.weixin;
       logger.log("info", message);
-
       res.reply('Message Send To Bot Completed , Wait Response.');
 
       api.sendText(message.FromUserName, 'this message from wechat-api', function (err, result) {

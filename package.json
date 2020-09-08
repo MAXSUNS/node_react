@@ -13,6 +13,7 @@
     "expect.js": "*",
     "express": "~4.15.2",
     "jade": "~1.11.0",
+    "log4js": "^6.3.0",
     "moment": "^2.27.0",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2",
