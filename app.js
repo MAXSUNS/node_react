@@ -9,15 +9,6 @@ var index = require('./routes/index');
 var access = require('./routes/access');
 
 var app = express();
-const config = require('./config');
-var wechat = require('wechat');
-var wechatAPI = require('wechat-api');
-const expect = require('expect.js');
-
-
-var api = new API(config.appid, config.appsecret);
-var token = api.getAccessToken();
-expect(token).to.only.have.keys('accessToken', 'expireTime');
 
 
 // view engine setup
