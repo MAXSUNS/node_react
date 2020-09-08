@@ -23,8 +23,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/api', access);
+app.use('/api', index);
+app.use('/access', access);
+
+var wechat = require('wechat');
+var wechatAPI = require('wechat-api');
+const config = require('./config');
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

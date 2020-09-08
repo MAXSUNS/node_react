@@ -3,10 +3,12 @@ var router = express.Router();
 var wechat = require('wechat');
 var wechatAPI = require('wechat-api');
 const config = require('../config');
-
+var Utils = require('../utils/utils')
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  result=Utils.getSignature(config,req.query)
+  res.send(result);
+  console.log('初始化获取accessToken失败')
 });
 
 // router.get('/wechat', wechat(config, wechat.text(function (message, req, res, next) {
