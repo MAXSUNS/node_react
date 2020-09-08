@@ -3,7 +3,7 @@ var router = express.Router();
 var API = require('wechat-api');
 var api = new API('appid', 'secret');
 const config = require('../config');
-
+var sha1 = require('sha1');
 
 /* GET users listing. */
 router.get('/signature', function(req, res, next) {
