@@ -6,9 +6,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var access = require('./routes/access');
 
 var app = express();
+const config = require('./config');
+var wechat = require('wechat');
+var wechatAPI = require('wechat-api');
+const expect = require('expect.js');
+
+
+var api = new API(config.appid, config.appsecret);
+var token = api.getAccessToken();
+expect(token).to.only.have.keys('accessToken', 'expireTime');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/api', access);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

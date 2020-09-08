@@ -7,11 +7,15 @@
   },
   "dependencies": {
     "body-parser": "~1.17.1",
+    "co-wechat-api": "^3.10.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "jade": "~1.11.0",
     "morgan": "~1.8.1",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "wechat": "^2.1.0",
+    "expect.js": "*",
+    "wechat-api": "^1.35.1"
   }
 }
