@@ -10,7 +10,7 @@ var Utils = require('../utils/utils')
 router.get('/wechat', function(req, res, next) {
   var resl=Utils.getSignature(config,req.query)
   res.send(resl);
-  console.log('初始化获取accessToken失败')
+  logger.log("info", resl);
 });
 
 router.post('/wechat', wechat(config, wechat.text(function (message, req, res, next) {
