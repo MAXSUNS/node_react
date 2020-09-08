@@ -5,7 +5,7 @@ var wechatAPI = require('wechat-api');
 const config = require('../config');
 var Utils = require('../utils/utils')
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/wechat', function(req, res, next) {
   result=Utils.getSignature(config,req.query)
   res.send(result);
   console.log('初始化获取accessToken失败')
