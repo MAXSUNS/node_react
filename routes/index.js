@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var wechat = require('wechat');
 var wechatAPI = require('wechat-api');
+const config = require('../config');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
