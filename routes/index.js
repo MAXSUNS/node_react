@@ -6,13 +6,21 @@ var wechat = require('wechat');
 var wechatAPI = require('wechat-api');
 const config = require('../config');
 var Utils = require('../utils/utils')
+var talk = require('../services/robot')
 var api = new wechatAPI(config.appid, config.appsecret);
 
 /* GET home page. */
 router.get('/wechat', function(req, res, next) {
   var resl=Utils.getSignature(config,req.query)
   res.send(resl);
-  logger.log("info", resl);
+});
+
+/* GET home page. */
+router.get('/talk',  function(req, res, next) {
+     talk(req.query.talk).then(resl=>{
+        res.send(resl);
+        logger.log("info", "robot talk result:"+resl);
+    })
 });
 
 router.post('/wechat', wechat(config, wechat.text(function (message, req, res, next) {
@@ -43,14 +51,10 @@ router.post('/wechat', wechat(config, wechat.text(function (message, req, res, n
         });
     } else {
         // 回复高富帅(图文回复)
-        res.reply([
-            {
-                title: '你来我家接我吧',
-                description: '这是女神与高富帅之间的对话',
-                picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
-                url: 'http://nodeapi.cloudfoundry.com/'
-            }
-        ]);
+        talk(message.Content).then(resl=>{
+            res.reply(resl);
+            logger.log("info", "robot talk result:"+resl);
+        })
     }
 })));
 module.exports = router;
