@@ -43,7 +43,10 @@ router.post('/wechat', wechat(config, wechat.text(function (message, req, res, n
             if (resl.indexOf("{br}")){
                 resl=resl.replaceAll("{br}", "\n")
             }
-            res.reply(resl);
+            res.reply({
+                content: resl,
+                type: 'text'
+            });
             logger.log("info", "robot talk result:"+resl);
         })
     }
