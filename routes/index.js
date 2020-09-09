@@ -40,7 +40,10 @@ router.post('/wechat', wechat(config, wechat.text(function (message, req, res, n
     } else {
         // 回复高富帅(图文回复)
         talk(message.Content).then(resl=>{
-            res.reply(resl.replaceAll("{br}", "\n"));
+            if (resl.indexOf("{br}")){
+                resl=resl.replaceAll("{br}", "\n")
+            }
+            res.reply(resl);
             logger.log("info", "robot talk result:"+resl);
         })
     }
