@@ -16,8 +16,8 @@ router.get('/wechat', function(req, res, next) {
 });
 
 /* GET home page. */
-router.get('/talk',  function(req, res, next) {
-     talk(req.query.talk).then(resl=>{
+router.get('/talk', function(req, res, next) {
+      talk(req.query.talk).then(resl=>{
         res.send(resl);
         logger.log("info", "robot talk result:"+resl);
     })
