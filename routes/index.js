@@ -37,18 +37,6 @@ router.post('/wechat', wechat(config, wechat.text(function (message, req, res, n
             content: 'text object',
             type: 'text'
         });
-    } else if (message.Content === 'hehe') {
-        // 回复一段音乐
-        res.reply({
-            type: "music",
-            content: {
-                title: "来段音乐吧",
-                description: "一无所有",
-                musicUrl: "http://mp3.com/xx.mp3",
-                hqMusicUrl: "http://mp3.com/xx.mp3",
-                thumbMediaId: "thisThumbMediaId"
-            }
-        });
     } else {
         // 回复高富帅(图文回复)
         talk(message.Content).then(resl=>{
