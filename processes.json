@@ -1,0 +1,22 @@
+{
+  "apps": [
+    {
+      "name": "wechat-node",
+      "cwd": "current",
+      "script": "bin/www",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss",
+      "error_file": "./logs/node-app/node-app.stderr.log",
+      "out_file": "./logs/node-app.stdout.log",
+      "pid_file": "./logs/node-geo-api.pid",
+      "instances": 1,
+      "min_uptime": "1s",
+      "max_restarts": 10,
+      "watch": false,
+      "merge_logs": true,
+      "exec_interpreter": "node",
+      "exec_mode": "fork",
+      "autorestart": false,
+      "vizion": false
+    }
+  ]
+}
