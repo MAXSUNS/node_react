@@ -52,7 +52,7 @@ router.post('/wechat', wechat(config, wechat.text(function (message, req, res, n
     } else {
         // 回复高富帅(图文回复)
         talk(message.Content).then(resl=>{
-            res.reply(resl);
+            res.reply(resl.replaceAll("{br}", "\n"));
             logger.log("info", "robot talk result:"+resl);
         })
     }
