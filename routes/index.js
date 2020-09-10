@@ -49,13 +49,18 @@ router.get('/talk', function(req, res, next) {
 });
 /* GET home page. */
 router.get('/menu', function(req, res, next) {
-    var menu = JSON.stringify(menuConfig);
-    api.createMenu(menu, function (err, result) {
-        logger.log("info", "create menu:"+err);
-        logger.log("info", "create menu:"+result);
+
+    try {
+        var menu = JSON.stringify(menuConfig);
+        api.createMenu(menu, function (err, result) {
+            logger.log("info", "create menu:"+err);
+            logger.log("info", "create menu:"+JSON.stringify(result));
+        });
         res.send("createMenu success");
-    });
-    res.send("createMenu success");
+    } catch(e) {
+        logger.log("error", "create menu error:"+JSON.stringify(e));
+        res.send("createMenu failed");
+    }
 });
 
 router.post('/wechat', wechat(config, wechat.text(function (message, req, res, next) {
