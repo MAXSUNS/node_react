@@ -1,3 +1,7 @@
 Source/node_modules/
 Source/dist/
 config.js
+.idea
+logs
+node_modules
+package-lock.json
