@@ -51,10 +51,9 @@ router.get('/talk', function(req, res, next) {
 router.get('/menu', function(req, res, next) {
     var menu = JSON.stringify(menuConfig);
     api.createMenu(menu, function (err, result) {
-        expect(err).not.to.be.ok();
-        expect(result).to.have.property('errcode', 0);
-        expect(result).to.have.property('errmsg', 'ok');
-        done();
+        logger.log("info", "create menu:"+err);
+        logger.log("info", "create menu:"+result);
+        res.send("createMenu success");
     });
     res.send("createMenu success");
 });
