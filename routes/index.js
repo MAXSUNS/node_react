@@ -19,20 +19,20 @@ const menuConfig = {
     "button": [
         {
             "type": "view",
-            "name": "测试链接1",
+            "name": "关于我们",
             "url": "http://www.sunsd.cn/"
         },
         {
-            "name": "测试链接2",
+            "name": "个人中心",
             "sub_button": [
                 {
                     "type": "view",
-                    "name": "授权",
+                    "name": "兑换卡券",
                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+config.appid+"&redirect_uri=http%3A%2F%2Fwww.sunsd.cn%2Fapi%2Fuser&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
                 },
                 {
                     "type": "view",
-                    "name": "授权2",
+                    "name": "我的",
                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+config.appid+"&redirect_uri=http://www.sunsd.cn/api/user&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
 
 }
@@ -111,7 +111,7 @@ router.get('/user', function(req, res, next) {
         logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
         getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
             logger.log("info", "userInfo:"+JSON.stringify(userInfo));
-            res.render(JSON.stringify(userInfo), { title: 'Express' });
+            res.render('user', userInfo);
         })
     })
 });
