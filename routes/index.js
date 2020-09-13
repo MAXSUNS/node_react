@@ -66,7 +66,7 @@ router.get('/menu', function(req, res, next) {
 router.post('/wechat', wechat(config, wechat.text(function (message, req, res, next) {
       //------------------------------------------------------------------------
       var message = req.weixin;
-      logger.log("info", message);
+      logger.log("info", JSON.stringify(message));
     // 微信输入信息都在req.weixin上
     if (message.Content === 'diaosi') {
         // 回复屌丝(普通回复)
