@@ -108,9 +108,9 @@ router.get('/getOauth', function(req, res, next) {
 router.get('/user', function(req, res, next) {
     logger.log("info", "user query:"+JSON.stringify(req.query));
     getOauthToken(config.appid,config.appsecret,req.query.code).then(tokenInfo=>{
-        logger.log("info", "tokenInfo:"+JSON.stringify(req.query));
+        logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
         getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
-            logger.log("info", "userInfo:"+JSON.stringify(req.query));
+            logger.log("info", "userInfo:"+JSON.stringify(userInfo));
             res.render(JSON.stringify(userInfo), { title: 'Express' });
         })
     })
