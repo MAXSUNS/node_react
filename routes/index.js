@@ -1,4 +1,3 @@
-import {getOauth} from "../services/oauth";
 
 const log4js = require('../utils/log4js');
 const logger = log4js.getLogger();
