@@ -2,7 +2,6 @@
   "apps": [
     {
       "name": "wechat-node",
-      "cwd": "current",
       "script": "bin/www",
       "log_date_format": "YYYY-MM-DD HH:mm:ss",
       "error_file": "./logs/errlog/error.log",
