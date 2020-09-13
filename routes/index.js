@@ -114,6 +114,5 @@ router.get('/user', function(req, res, next) {
             res.render(JSON.stringify(userInfo), { title: 'Express' });
         })
     })
-    res.render('index', { title: 'Express' });
 });
 module.exports = router;

@@ -40,7 +40,6 @@ var getOauthToken=function(appid,secret,code) {
                 reject(error);
             } else {
                 logger.log("info", "getOauthToken end!body:"+JSON.stringify(body));
-                logger.log("info", "getOauthToken end!response:"+JSON.stringify(response));
                 return body
             }
         });
