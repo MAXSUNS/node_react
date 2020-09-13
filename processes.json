@@ -5,8 +5,8 @@
       "cwd": "current",
       "script": "bin/www",
       "log_date_format": "YYYY-MM-DD HH:mm:ss",
-      "error_file": "./logs/errlog/err.log",
-      "out_file": "./logs/reqlog/out.log",
+      "error_file": "./logs/errlog/error.log",
+      "out_file": "./logs/reqlog/output.log",
       "pid_file": "./logs/node-geo-api.pid",
       "instances": 1,
       "min_uptime": "1s",
@@ -14,7 +14,7 @@
       "watch": false,
       "merge_logs": true,
       "exec_interpreter": "node",
-      "exec_mode": "fork",
+      "exec_mode": "cluster",
       "autorestart": false,
       "vizion": false
     }
