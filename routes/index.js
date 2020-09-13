@@ -27,12 +27,12 @@ const menuConfig = {
             "sub_button": [
                 {
                     "type": "view",
-                    "name": "测试链接2-1",
-                    "url": "http://www.sunsd.cn/"
+                    "name": "授权",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+config.appid+"&redirect_uri=http%3A%2F%2Fwww.sunsd.cn%2Fapi%2Fuser&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
                 },
                 {
                     "type": "view",
-                    "name": "测试链接2-2",
+                    "name": "授权2",
                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+config.appid+"&redirect_uri=http://www.sunsd.cn/api/user&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
 
 }
