@@ -111,7 +111,7 @@ router.get('/user', function(req, res, next) {
         logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
         getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
             logger.log("info", "userInfo:"+JSON.stringify(userInfo));
-            res.render('user', userInfo);
+            res.render('user', JSON.parse(userInfo));
         })
     })
 });
