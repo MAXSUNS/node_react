@@ -59,8 +59,11 @@ router.get('/menu', function(req, res, next) {
     try {
         var menu = JSON.stringify(menuConfig);
         api.createMenu(menu, function (err, result) {
-            logger.log("info", "create menu:"+err);
-            logger.log("info", "create menu:"+JSON.stringify(result));
+            if (err){
+                logger.log("info", "create menu:"+err);
+            }else {
+                logger.log("info", "create menu:"+JSON.stringify(result));
+            }
         });
         res.send("createMenu success");
     } catch(e) {
