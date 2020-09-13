@@ -33,8 +33,9 @@ const menuConfig = {
                 {
                     "type": "view",
                     "name": "测试链接2-2",
-                    "url": "http://www.sunsd.cn/api/getOauth"
-                }
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+config.appid+"&redirect_uri=http%3A%2F%2www.sunsd.cn%2api%2user&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
+
+}
             ]
         }
     ]
