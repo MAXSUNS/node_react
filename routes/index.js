@@ -1,3 +1,5 @@
+import {getOauth} from "../services/oauth";
+
 const log4js = require('../utils/log4js');
 const logger = log4js.getLogger();
 var express = require('express');
@@ -7,8 +9,12 @@ var wechatAPI = require('wechat-api');
 const config = require('../config');
 var Utils = require('../utils/utils')
 var talk = require('../services/robot')
+var getUserInfo = require('../services/wxUserInfo')
+var {getOauth,getOauthToken} = require('../services/oauth')
 var expect = require('expect.js');
 
+
+var userToken={}
 var api = new wechatAPI(config.appid, config.appsecret);
 const menuConfig = {
     "button": [
@@ -28,7 +34,7 @@ const menuConfig = {
                 {
                     "type": "view",
                     "name": "测试链接2-2",
-                    "url": "http://www.sunsd.cn/"
+                    "url": "http://www.sunsd.cn/api/getOauth"
                 }
             ]
         }
@@ -91,4 +97,20 @@ router.post('/wechat', wechat(config, wechat.text(function (message, req, res, n
         })
     }
 })));
+router.get('/getOauth', function(req, res, next) {
+
+    logger.log("info", JSON.stringify(req.query));
+    getOauth(config.appid);
+});
+router.get('/user', function(req, res, next) {
+    logger.log("info", "user query:"+JSON.stringify(req.query));
+    getOauthToken(config.appid,config.appsecret,req.query.code).then(tokenInfo=>{
+        logger.log("info", "tokenInfo:"+JSON.stringify(req.query));
+        getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
+            logger.log("info", "userInfo:"+JSON.stringify(req.query));
+            res.render(JSON.stringify(userInfo), { title: 'Express' });
+        })
+    })
+    res.render('index', { title: 'Express' });
+});
 module.exports = router;
