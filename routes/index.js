@@ -110,9 +110,10 @@ router.get('/user', function(req, res, next) {
     getOauthToken(config.appid,config.appsecret,req.query.code).then(tokenInfo=>{
         logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
         getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
-            logger.log("info", "userInfo:"+JSON.stringify(userInfo));
-            logger.log("info", "userInfo openid:"+JSON.parse(userinfo).openid);
-            res.location("http://www.sunsd.cn/?openId="+JSON.parse(userinfo).openid)
+            let info=JSON.parse(userinfo)
+            logger.log("info", "userInfo:"+JSON.stringify(info));
+            logger.log("info", "userInfo openid:"+info.openid);
+            res.location("http://www.sunsd.cn/?openId="+info.openid)
         })
     })
 });
