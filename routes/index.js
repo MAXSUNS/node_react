@@ -111,8 +111,8 @@ router.get('/user', function(req, res, next) {
         logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
         getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
             logger.log("info", "userInfo:"+JSON.stringify(userInfo));
-            logger.log("info", "userInfo openid:"+JSON.stringify(userinfo.openid));
-            res.location("http://www.sunsd.cn/?openId="+userinfo.openid)
+            logger.log("info", "userInfo openid:"+JSON.parse(userinfo).openid);
+            res.location("http://www.sunsd.cn/?openId="+JSON.parse(userinfo).openid)
         })
     })
 });
