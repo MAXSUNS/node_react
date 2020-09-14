@@ -113,7 +113,7 @@ router.get('/user', function(req, res, next) {
             let info=JSON.parse(userInfo)
             logger.log("info", "userInfo:"+JSON.stringify(info));
             logger.log("info", "userInfo openid:"+info.openid);
-            res.location("http://www.sunsd.cn/?openId="+info.openid)
+            res.redirect(301,"http://www.sunsd.cn/?openId="+info.openid)
         })
     })
 });
