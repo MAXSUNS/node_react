@@ -1,8 +1,10 @@
 var user = {
-    insert:'INSERT INTO user(id, name, age) VALUES(0,?,?)',
-    update:'update user set name=?, age=? where id=?',
+    insert:'INSERT INTO user( nickname,password,gender, weixin_openid) VALUES(?,?,?,?)',
+    updateUser:'update user set username=?, password=? where id=?',
+    updateMobile:'update user set mobile=? where id=?',
     delete: 'delete from user where id=?',
-    queryAll: 'select * from user'
+    queryByOpenid: 'select * from user where weixin_openid=?',
+    queryAll: 'select * from user limit ?,?'
 };
 
 module.exports = user;
