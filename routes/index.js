@@ -27,12 +27,12 @@ const menuConfig = {
                 {
                     "type": "view",
                     "name": "兑换卡券",
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http%3A%2F%2Fwww.sunsd.cn%2Fapi%2Fuser&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http%3a%2f%2fwww.sunsd.cn%2f%23%2f&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
                 },
                 {
                     "type": "view",
                     "name": "我的",
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http://www.sunsd.cn/api/user&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http://www.sunsd.cn&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
 
 }
             ]
@@ -110,7 +110,7 @@ router.get('/user', function(req, res, next) {
         logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
         getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
             logger.log("info", "userInfo:"+JSON.stringify(userInfo));
-            res.render('user', JSON.parse(userInfo));
+            res.send(userInfo);
         })
     })
 });
