@@ -11,7 +11,6 @@ var talk = require('../services/robot')
 var getUserInfo = require('../services/wxUserInfo')
 var {getOauth,getOauthToken} = require('../services/oauth')
 
-
 var userToken={}
 var api = new wechatAPI(wx.appid, wx.appsecret);
 const menuConfig = {
