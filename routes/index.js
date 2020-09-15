@@ -5,16 +5,15 @@ var express = require('express');
 var router = express.Router();
 var wechat = require('wechat');
 var wechatAPI = require('wechat-api');
-const config = require('../config');
+const {wx} = require('../config');
 var Utils = require('../utils/utils')
 var talk = require('../services/robot')
 var getUserInfo = require('../services/wxUserInfo')
 var {getOauth,getOauthToken} = require('../services/oauth')
-var expect = require('expect.js');
 
 
 var userToken={}
-var api = new wechatAPI(config.appid, config.appsecret);
+var api = new wechatAPI(wx.appid, wx.appsecret);
 const menuConfig = {
     "button": [
         {
@@ -28,12 +27,12 @@ const menuConfig = {
                 {
                     "type": "view",
                     "name": "兑换卡券",
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+config.appid+"&redirect_uri=http%3A%2F%2Fwww.sunsd.cn%2Fapi%2Fuser&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http%3A%2F%2Fwww.sunsd.cn%2Fapi%2Fuser&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
                 },
                 {
                     "type": "view",
                     "name": "我的",
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+config.appid+"&redirect_uri=http://www.sunsd.cn/api/user&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http://www.sunsd.cn/api/user&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
 
 }
             ]
@@ -42,7 +41,7 @@ const menuConfig = {
 };
 /* GET home page. */
 router.get('/wechat', function(req, res, next) {
-    var resl=Utils.getSignature(config,req.query)
+    var resl=Utils.getSignature(wx,req.query)
     res.send(resl);
 });
 
@@ -72,7 +71,7 @@ router.get('/menu', function(req, res, next) {
     }
 });
 
-router.post('/wechat', wechat(config, wechat.text(function (message, req, res, next) {
+router.post('/wechat', wechat(wx, wechat.text(function (message, req, res, next) {
       //------------------------------------------------------------------------
       var message = req.weixin;
       logger.log("info", JSON.stringify(message));
@@ -103,11 +102,11 @@ router.post('/wechat', wechat(config, wechat.text(function (message, req, res, n
 router.get('/getOauth', function(req, res, next) {
 
     logger.log("info", JSON.stringify(req.query));
-    getOauth(config.appid);
+    getOauth(wx.appid);
 });
 router.get('/user', function(req, res, next) {
     logger.log("info", "user query:"+JSON.stringify(req.query));
-    getOauthToken(config.appid,config.appsecret,req.query.code).then(tokenInfo=>{
+    getOauthToken(wx.appid,wx.appsecret,req.query.code).then(tokenInfo=>{
         logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
         getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
             logger.log("info", "userInfo:"+JSON.stringify(userInfo));

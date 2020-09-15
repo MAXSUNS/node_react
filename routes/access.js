@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var API = require('wechat-api');
 var api = new API('appid', 'secret');
-const config = require('../config');
+const wx = require('../config');
 var sha1 = require('sha1');
 
 /* GET users listing. */
@@ -10,7 +10,7 @@ router.get('/signature', function(req, res, next) {
   // GET请求携带参数是个参数signature,timestamp,nonce,echostr
   const {signature,timestamp,nonce,echostr} = req.query;
   // 服务器的token
-  const token = config.token;
+  const token = wx.token;
   // 将token、timestamp、nonce三个参数进行字典序排序
   const arrSort = [token,timestamp,nonce];
   arrSort.sort();
