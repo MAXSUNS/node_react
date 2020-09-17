@@ -12,7 +12,7 @@ module.exports = {
     add: function (userInfo) {
         pool.getConnection(function(err, connection) {
             logger.info("add user :"+JSON.stringify(userInfo))
-            let result=queryByOpenid(userInfo.openid);
+            let result=this.queryByOpenid(userInfo.openid);
             logger.info("search result:"+JSON.stringify(result))
             if (result){
                 return 'add success';
