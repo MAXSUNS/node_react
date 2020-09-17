@@ -25,6 +25,7 @@ var add=function (userInfo) {
                 if(err) {
                     logger.info("end add  user to db:"+JSON.stringify(err))
                 }else{
+                    //{"fieldCount":0,"affectedRows":1,"insertId":1,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}
                     logger.info("end add  user to db:"+JSON.stringify(result))
                 }
                 connection.release();
