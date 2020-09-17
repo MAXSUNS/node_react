@@ -1,3 +1,4 @@
+import * as userDao from "../dao/userDAO";
 
 const log4js = require('../utils/log4js');
 const logger = log4js.getLogger();
@@ -109,6 +110,7 @@ router.get('/user', function(req, res, next) {
         logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
         getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
             logger.log("info", "userInfo:"+JSON.stringify(userInfo));
+            userDao.add(userInfo)
             res.send(userInfo);
         })
     })
