@@ -11,6 +11,7 @@ const logger = log4js.getLogger();
 var add=function (userInfo) {
         pool.getConnection(function(err, connection) {
             logger.info("add user :"+JSON.stringify(userInfo))
+            userInfo=JSON.parse(userInfo)
             let result=queryByOpenid(userInfo.openid);
             logger.info("search result:"+JSON.stringify(result))
             if (result){
