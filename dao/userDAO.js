@@ -18,7 +18,7 @@ var add=function (userInfo) {
                 return 'add success';
             }
             logger.info("begin add  user to db:"+userInfo.openid)
-            connection.query($sql.insert, [userInfo.openid,userInfo.nickname, userInfo.password, userInfo.gender, userInfo.openid], function(err, result) {
+            connection.query($sql.insert, [userInfo.openid,userInfo.nickname, userInfo.openid, userInfo.sex, userInfo.openid], function(err, result) {
                 // 释放连接
                 logger.info("end add  user to db")
 
