@@ -8,11 +8,10 @@ var pool = mysql.createPool( config.sqlConfig );
 const log4js = require('../utils/log4js');
 const logger = log4js.getLogger();
 
-module.exports = {
-    add: function (userInfo) {
+var add=function (userInfo) {
         pool.getConnection(function(err, connection) {
             logger.info("add user :"+JSON.stringify(userInfo))
-            let result=this.queryByOpenid(userInfo.openid);
+            let result=queryByOpenid(userInfo.openid);
             logger.info("search result:"+JSON.stringify(result))
             if (result){
                 return 'add success';
@@ -29,8 +28,8 @@ module.exports = {
 
             });
         });
-    },
-    queryAll: function (page,count) {
+    }
+var queryAll=function (page,count) {
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryAll, [page, count], function(err, result) {
                 connection.release();
@@ -41,8 +40,8 @@ module.exports = {
                 }
             });
         });
-    },
-    queryByOpenid: function (openid) {
+    }
+var queryByOpenid= function (openid) {
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryByOpenid, [openid], function(err, result) {
                 connection.release();
@@ -53,8 +52,8 @@ module.exports = {
                 }
             });
         });
-    },
-    update: function (userInfo) {
+    }
+var  update= function (userInfo) {
         pool.getConnection(function(err, connection) {
             connection.query($sql.update, [param.name, param.age, +param.id], function(err, result) {
                 if(err) {
@@ -66,4 +65,5 @@ module.exports = {
             });
         });
     }
-};
+
+module.exports = {update,add,update,queryByOpenid,queryAll};
