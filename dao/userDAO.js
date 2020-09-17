@@ -16,16 +16,17 @@ var add=function (userInfo) {
             if (result){
                 return 'add success';
             }
+            logger.info("begin add  user to db")
             connection.query($sql.insert, [userInfo.nickname, userInfo.password, userInfo.gender, userInfo.openid], function(err, result) {
-
                 // 释放连接
-                connection.release();
-                if(err) {
-                    return err
-                }else{
-                    return 'add success';
-                }
+                logger.info("end add  user to db")
 
+                if(err) {
+                    logger.info("end add  user to db:"+JSON.stringify(err))
+                }else{
+                    logger.info("end add  user to db:"+JSON.stringify(result))
+                }
+                connection.release();
             });
         });
     }
