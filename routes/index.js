@@ -11,6 +11,7 @@ var talk = require('../services/robot')
 var getUserInfo = require('../services/wxUserInfo')
 var {getOauth,getOauthToken} = require('../services/oauth')
 var userRouter = require( './user')
+var orderRouter = require( './order')
 var userToken={}
 var api = new wechatAPI(wx.appid, wx.appsecret);
 const menuConfig = {
@@ -39,7 +40,8 @@ const menuConfig = {
     ]
 };
 
-router.use('/users', userRouter);
+router.use('/user', userRouter);
+router.use('/order', orderRouter);
 
 /* GET home page. */
 router.get('/wechat', function(req, res, next) {
@@ -47,13 +49,7 @@ router.get('/wechat', function(req, res, next) {
     res.send(resl);
 });
 
-/* GET home page. */
-router.get('/talk', function(req, res, next) {
-    talk(req.query.talk).then(resl=>{
-        res.send(resl);
-        logger.log("info", "robot talk result:"+resl);
-    })
-});
+
 /* GET home page. */
 router.get('/menu', function(req, res, next) {
 
@@ -101,20 +97,10 @@ router.post('/wechat', wechat(wx, wechat.text(function (message, req, res, next)
         })
     }
 })));
-router.get('/getOauth', function(req, res, next) {
 
+router.get('/getOauth', function(req, res, next) {
     logger.log("info", JSON.stringify(req.query));
     getOauth(wx.appid);
 });
-router.get('/user', function(req, res, next) {
-    logger.log("info", "user query:"+JSON.stringify(req.query));
-    getOauthToken(wx.appid,wx.appsecret,req.query.code).then(tokenInfo=>{
-        logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
-        getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
-            logger.log("info", "userInfo:"+JSON.stringify(userInfo));
-            userDao.add(userInfo)
-            res.send(userInfo);
-        })
-    })
-});
+
 module.exports = router;

@@ -13,4 +13,10 @@ var wx ={
   // encodingAESKey:'PLhyMCfZyfWQqwJSHFnZgFH4Z7v1hO3ID3ZGSL57ix',
   checkSignature: true
 }
-module.exports = {sqlConfig,wx};
+
+var redis ={
+  host: '127.0.0.1',
+  port: '6379',
+  ttl: 5*60*1000
+}
+module.exports = {sqlConfig,wx,redis};
