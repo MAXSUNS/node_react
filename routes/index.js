@@ -10,7 +10,7 @@ var Utils = require('../utils/utils')
 var talk = require('../services/robot')
 var getUserInfo = require('../services/wxUserInfo')
 var {getOauth,getOauthToken} = require('../services/oauth')
-
+var userRouter = require( './user')
 var userToken={}
 var api = new wechatAPI(wx.appid, wx.appsecret);
 const menuConfig = {
@@ -38,6 +38,9 @@ const menuConfig = {
         }
     ]
 };
+
+router.use('/users', userRouter);
+
 /* GET home page. */
 router.get('/wechat', function(req, res, next) {
     var resl=Utils.getSignature(wx,req.query)
