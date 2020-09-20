@@ -33,10 +33,10 @@ userRouter.get('/', function(req, res, next) {
         logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
         if (tokenInfo.hasOwnProperty('access_token')){
             getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
-                logger.log("info", "userInfo:"+JSON.stringify(userInfo));
                 if (userInfo.hasOwnProperty('openid')){
                     userDao.add(userInfo).then(userResult =>{
                         userInfo['id']=userResult
+                        logger.log("info", "userInfo:"+JSON.stringify(userInfo));
                         res.send(userInfo);
                     })
                 }
