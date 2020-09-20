@@ -36,6 +36,7 @@ userRouter.get('/', function(req, res, next) {
                 if (userInfo.hasOwnProperty('openid')){
                     userDao.add(userInfo).then(userResult =>{
                         userInfo['id']=userResult
+                        logger.log("info", "userResult:"+JSON.stringify(userResult));
                         logger.log("info", "userInfo:"+JSON.stringify(userInfo));
                         res.send(userInfo);
                     })
