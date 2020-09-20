@@ -9,22 +9,6 @@ const {wx} = require('../config');
 
 const userDao = require('../dao/userDAO');
 
-/* GET home page. */
-userRouter.get('/', function(req, res, next) {
-    logger.log("info", "user query:"+JSON.stringify(req.query));
-    getOauthToken(wx.appid,wx.appsecret,req.query.code).then(tokenInfo=>{
-        logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
-        if (tokenInfo.hasOwnProperty('access_token')){
-            getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
-                logger.log("info", "userInfo:"+JSON.stringify(userInfo));
-                if (userInfo.hasOwnProperty('openid')){
-                    userDao.add(userInfo)
-                }
-                res.send(userInfo);
-            })
-        }
-    })
-});
 
 /* GET home page. */
 userRouter.get('/', function(req, res, next) {
@@ -35,7 +19,6 @@ userRouter.get('/', function(req, res, next) {
             getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
                 if (userInfo.hasOwnProperty('openid')){
                     userDao.add(userInfo).then(userResult =>{
-                        userInfo=JSON.parse(userInfo)
                         userInfo['id']=userResult
                         logger.log("info", "-----userResult--------:"+JSON.stringify(userResult));
                         logger.log("info", "userInfo:"+JSON.stringify(userInfo));
