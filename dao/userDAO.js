@@ -12,7 +12,6 @@ var add=function (userInfo) {
     var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
             logger.info("add user :"+JSON.stringify(userInfo))
-            userInfo=JSON.parse(userInfo)
             queryByOpenid(userInfo.openid).then(userDb=>{
                 logger.info("search user result:"+JSON.stringify(userDb))
                 logger.info("search user result:"+JSON.stringify(userDb.length))

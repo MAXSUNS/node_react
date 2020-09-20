@@ -18,6 +18,7 @@ userRouter.get('/', function(req, res, next) {
         logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
             getUserInfo(tokenInfo.access_token,tokenInfo.openid).then(userInfo=>{
                 userInfo=JSON.parse(userInfo)
+                logger.log("info", "userInfo:"+JSON.stringify(userInfo));
                 if (userInfo.hasOwnProperty('openid')){
                     userDao.add(userInfo).then(userResult =>{
                         userInfo['id']=userResult

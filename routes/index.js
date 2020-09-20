@@ -22,7 +22,7 @@ const menuConfig = {
         },
         {
                     "type": "view",
-                    "name": "我的",
+                    "name": "个人中心",
                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http://www.sunsd.cn&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
         }
     ]
