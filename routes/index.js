@@ -22,20 +22,9 @@ const menuConfig = {
             "url": "http://www.sunsd.cn/"
         },
         {
-            "name": "个人中心",
-            "sub_button": [
-                {
-                    "type": "view",
-                    "name": "兑换卡券",
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http%3a%2f%2fwww.sunsd.cn%2f%23%2f&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
-                },
-                {
                     "type": "view",
                     "name": "我的",
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http://www.sunsd.cn&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",
-
-}
-            ]
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http://www.sunsd.cn&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
         }
     ]
 };
