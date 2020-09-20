@@ -1,60 +1,52 @@
-var express = require('express');
 var mysql = require('mysql');
 
 var config = require('../config');
-var $sql = require('./userSql');
+var $sql = require('./exchangeSql');
 
 var pool = mysql.createPool( config.sqlConfig );
+const log4js = require('../utils/log4js');
+const logger = log4js.getLogger();
 
-module.exports = {
-    add: function (userInfo) {
+var queryByCode= function (code,password) {
+    var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
-            connection.query($sql.insert, [userInfo.nickname, userInfo.password, userInfo.gender, userInfo.openid], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send('add success');
-                }
+        logger.info(`queryByCode :${code},by:${password}`)
+        connection.query($sql.queryByCode, [code,password], function(err, result) {
+            connection.release();
+            if(err) {
+                reject(err);
+            }else{
+                resolve(result);
+            }
+        });
+    });
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
 
-                // 释放连接
-                connection.release();
-            });
-        });
-    },
-    queryAll: function (page,count) {
+var  updateExchange= function (userId,status,code) {
+
+    var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
-            connection.query($sql.queryAll, [page, count], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send(result);
-                }
+            // 兑换状态 0：初始状态  1：已兑换 2：已作废
+            logger.info(`update exchange code :${userId},by:${status},to :${code}`)
+            connection.query($sql.updateExchange, [userId, status, code], function(err, result) {
                 connection.release();
+                if(err) {
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
             });
         });
-    },
-    queryByOpenid: function (openid) {
-        pool.getConnection(function(err, connection) {
-            connection.query($sql.queryByOpenid, [openid], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send(result);
-                }
-                connection.release();
-            });
-        });
-    },
-    update: function (userInfo) {
-        pool.getConnection(function(err, connection) {
-            connection.query($sql.update, [param.name, param.age, +param.id], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send('update success');
-                }
-                connection.release();
-            });
-        });
-    }
-};
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
+
+module.exports = {queryByCode,updateExchange};

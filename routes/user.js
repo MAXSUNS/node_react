@@ -4,6 +4,7 @@ const logger = log4js.getLogger();
 var express = require('express');
 var userRouter = express.Router();
 
+const userDao = require('../dao/userDAO');
 
 /* GET home page. */
 userRouter.get('/', function(req, res, next) {
