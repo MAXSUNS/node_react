@@ -35,8 +35,9 @@ userRouter.get('/', function(req, res, next) {
             getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
                 if (userInfo.hasOwnProperty('openid')){
                     userDao.add(userInfo).then(userResult =>{
+                        userInfo=JSON.parse(userInfo)
                         userInfo['id']=userResult
-                        logger.log("info", "userResult:"+JSON.stringify(userResult));
+                        logger.log("info", "-----userResult--------:"+JSON.stringify(userResult));
                         logger.log("info", "userInfo:"+JSON.stringify(userInfo));
                         res.send(userInfo);
                     })
@@ -45,5 +46,7 @@ userRouter.get('/', function(req, res, next) {
         }
     })
 });
+
+
 
 module.exports = userRouter;
