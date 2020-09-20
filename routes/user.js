@@ -16,8 +16,7 @@ userRouter.get('/', function(req, res, next) {
     logger.log("info", "user query:"+JSON.stringify(req.query));
     getOauthToken(wx.appid,wx.appsecret,req.query.code).then(tokenInfo=>{
         logger.log("info", "tokenInfo:"+JSON.stringify(tokenInfo));
-        if (tokenInfo.hasOwnProperty('access_token')){
-            getUserInfo(tokenInfo.access_token,tokenInfo.access_token).then(userInfo=>{
+            getUserInfo(tokenInfo.access_token,tokenInfo.openid).then(userInfo=>{
                 if (userInfo.hasOwnProperty('openid')){
                     userDao.add(userInfo).then(userResult =>{
                         userInfo=JSON.parse(userInfo)
@@ -28,7 +27,6 @@ userRouter.get('/', function(req, res, next) {
                     })
                 }
             })
-        }
     })
 });
 
