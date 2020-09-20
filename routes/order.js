@@ -25,10 +25,14 @@ orderRouter.get('/exchange', function(req, res, next) {
     let qy = req.query
     exchangeDAO.queryByCode(qy.code,qy.password).then(result=> {
         logger.log("info", "exchange search result:" + JSON.stringify(result));
-        exchangeDAO.updateExchange(qy.userId,qy.status,qy.code).then(updateResult=> {
-            logger.log("info", "exchange update result:"+JSON.stringify(updateResult));
-            res.send(updateResult);
-        })
+        if (result.status===0){
+            exchangeDAO.updateExchange(qy.userId,1,qy.code).then(updateResult=> {
+                logger.log("info", "exchange update result:"+JSON.stringify(updateResult));
+                res.send("兑换成功，请在-我的订单-中完善收货信息。");
+            })
+        }else {
+            res.send("该兑换码已兑换，请确认后重试！");
+        }
     })
 });
 

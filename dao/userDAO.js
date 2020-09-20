@@ -9,52 +9,70 @@ const log4js = require('../utils/log4js');
 const logger = log4js.getLogger();
 
 var add=function (userInfo) {
+    var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
             logger.info("add user :"+JSON.stringify(userInfo))
             userInfo=JSON.parse(userInfo)
-            let result=queryByOpenid(userInfo.openid);
-            logger.info("search result:"+JSON.stringify(result))
-            if (result){
-                return 'add success';
-            }
-            logger.info("begin add  user to db:"+userInfo.openid)
-            connection.query($sql.insert, [userInfo.openid,userInfo.nickname, userInfo.openid, userInfo.sex, userInfo.openid], function(err, result) {
-                // 释放连接
-                logger.info("end add  user to db")
-
-                if(err) {
-                    logger.info("end add  user to db:"+JSON.stringify(err))
-                }else{
-                    //{"fieldCount":0,"affectedRows":1,"insertId":1,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}
-                    logger.info("end add  user to db:"+JSON.stringify(result))
+            queryByOpenid(userInfo.openid).then(userDb=>{
+                logger.info("search result:"+JSON.stringify(userDb))
+                if (userDb){
+                    resolve(userDb.id);
                 }
-                connection.release();
+                logger.info("begin add  user to db:"+userInfo.openid)
+                connection.query($sql.insert, [userInfo.openid,userInfo.nickname, userInfo.openid, userInfo.sex, userInfo.openid], function(err, result) {
+                    if(err) {
+                        logger.info("end add  user to db:"+JSON.stringify(err))
+                    }else{
+                        //{"fieldCount":0,"affectedRows":1,"insertId":1,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}
+                        logger.info("end add  user to db:"+JSON.stringify(result))
+                    }
+                    resolve(result.insertId);
+                    connection.release();
+                });
             });
         });
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
     }
 var queryAll=function (page,count) {
+    var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryAll, [page, count], function(err, result) {
                 connection.release();
                 if(err) {
-                    return err
+                    reject(err);
                 }else{
-                    return result;
+                    resolve(result);
                 }
             });
         });
-    }
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
+
 var queryByOpenid= function (openid) {
-        pool.getConnection(function(err, connection) {
+    var promise = new Promise(function (resolve, reject) {
+    pool.getConnection(function(err, connection) {
             connection.query($sql.queryByOpenid, [openid], function(err, result) {
                 connection.release();
                 if(err) {
-                    return err
+                    reject(err);
                 }else{
-                    return result;
+                    resolve(result);
                 }
             });
         });
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
     }
 var  update= function (userInfo) {
         pool.getConnection(function(err, connection) {
