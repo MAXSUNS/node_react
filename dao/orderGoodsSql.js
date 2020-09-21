@@ -1,10 +1,8 @@
 var user = {
-    insert:'INSERT INTO user( nickname,password,gender, weixin_openid) VALUES(?,?,?,?)',
-    updateUser:'update user set username=?, password=? where id=?',
-    updateMobile:'update user set mobile=? where id=?',
-    delete: 'delete from user where id=?',
-    queryByOpenid: 'select * from user where weixin_openid=?',
-    queryAll: 'select * from user limit ?,?'
+    updateMobile:'update litemall_order_goods set mobile=? where id=?',
+    delete: 'delete from litemall_order_goods where id=?',
+    queryByOrderid: 'select * from litemall_order_goods where order_id=?',
+    queryAll: 'select * from litemall_order_goods limit ?,?'
 };
 
 module.exports = user;

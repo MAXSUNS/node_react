@@ -1,10 +1,8 @@
-var user = {
-    insert:'INSERT INTO litemall_user( username,nickname,password,gender, weixin_openid) VALUES(?,?,?,?,?)',
-    updateUser:'update litemall_user set username=?, password=? where id=?',
-    updateMobile:'update litemall_user set mobile=? where id=?',
-    delete: 'delete from litemall_user where id=?',
-    queryByOpenid: 'select * from litemall_user where weixin_openid=?',
-    queryAll: 'select * from litemall_user limit ?,?'
+var goods = {
+    updateGoods:'update litemall_goods set name=? where id=?',
+    delete: 'delete from litemall_goods where id=?',
+    queryByGoodsid: 'select * from litemall_goods where id=?',
+    queryAll: 'select * from litemall_goods limit ?,?'
 };
 
-module.exports = user;
+module.exports = goods;
