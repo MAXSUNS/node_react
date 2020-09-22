@@ -30,6 +30,26 @@ var insert= function (orderId, goodsId, goodsName, number) {
     return promise;
 }
 
+var batchInsert= function (info) {
+    var promise = new Promise(function (resolve, reject) {
+        pool.getConnection(function(err, connection) {
+            logger.info(`insert orderGoodsSql orderId :${info}`)
+            connection.query($sql.batchInsert, [info], function(err, result) {
+                connection.release();
+                if(err) {
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
+            });
+        });
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
+
 var  queryByOrderid= function (id) {
     var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
@@ -50,4 +70,4 @@ var  queryByOrderid= function (id) {
     return promise;
 }
 
-module.exports = {insert,queryByOrderid};
+module.exports = {insert,queryByOrderid,batchInsert};
