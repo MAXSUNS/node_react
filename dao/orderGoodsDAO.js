@@ -2,59 +2,52 @@ var express = require('express');
 var mysql = require('mysql');
 
 var config = require('../config');
-var $sql = require('./userSql');
+var $sql = require('./orderGoodsSql');
+
+
 
 var pool = mysql.createPool( config.sqlConfig );
+const log4js = require('../utils/log4js');
+const logger = log4js.getLogger();
 
-module.exports = {
-    add: function (userInfo) {
+var insert= function (orderId, goodsId, goodsName, number) {
+    var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
-            connection.query($sql.insert, [userInfo.nickname, userInfo.password, userInfo.gender, userInfo.openid], function(err, result) {
+            logger.info(`insert orderGoodsSql orderId :${orderId}`)
+            connection.query($sql.insert, [orderId, goodsId, goodsName, number], function(err, result) {
+                connection.release();
                 if(err) {
-                    res.send(err);
+                    reject(err);
                 }else{
-                    res.send('add success');
+                    resolve(result);
                 }
+            });
+        });
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
 
-                // 释放连接
-                connection.release();
-            });
-        });
-    },
-    queryAll: function (page,count) {
+var  queryByOrderid= function (id) {
+    var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
-            connection.query($sql.queryAll, [page, count], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send(result);
-                }
+            logger.info(`order queryByOrderid  id:${id}`)
+            connection.query($sql.queryByOrderid, [id], function(err, result) {
                 connection.release();
+                if(err) {
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
             });
         });
-    },
-    queryByOpenid: function (openid) {
-        pool.getConnection(function(err, connection) {
-            connection.query($sql.queryByOpenid, [openid], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send(result);
-                }
-                connection.release();
-            });
-        });
-    },
-    update: function (userInfo) {
-        pool.getConnection(function(err, connection) {
-            connection.query($sql.update, [param.name, param.age, +param.id], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send('update success');
-                }
-                connection.release();
-            });
-        });
-    }
-};
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
+
+module.exports = {insert,queryByOrderid};

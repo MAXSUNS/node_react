@@ -2,59 +2,54 @@ var express = require('express');
 var mysql = require('mysql');
 
 var config = require('../config');
-var $sql = require('./userSql');
+var $sql = require('./goodsSql');
+
 
 var pool = mysql.createPool( config.sqlConfig );
+const log4js = require('../utils/log4js');
+const logger = log4js.getLogger();
 
-module.exports = {
-    add: function (userInfo) {
-        pool.getConnection(function(err, connection) {
-            connection.query($sql.insert, [userInfo.nickname, userInfo.password, userInfo.gender, userInfo.openid], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send('add success');
-                }
 
-                // 释放连接
-                connection.release();
-            });
-        });
-    },
-    queryAll: function (page,count) {
+var queryByGoodsid= function (goodsid) {
+    var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
-            connection.query($sql.queryAll, [page, count], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send(result);
-                }
+            logger.info(`goodsid :${goodsid}`)
+            connection.query($sql.queryByGoodsid, [goodsid], function(err, result) {
                 connection.release();
+                if(err) {
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
             });
         });
-    },
-    queryByOpenid: function (openid) {
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
+
+var  updateGoods= function (name,id) {
+
+    var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
-            connection.query($sql.queryByOpenid, [openid], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send(result);
-                }
+            // 兑换状态 0：初始状态  1：已兑换 2：已作废
+            logger.info(`update exchange name :${name},id:${id}`)
+            connection.query($sql.updateGoods, [name,id], function(err, result) {
                 connection.release();
+                if(err) {
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
             });
         });
-    },
-    update: function (userInfo) {
-        pool.getConnection(function(err, connection) {
-            connection.query($sql.update, [param.name, param.age, +param.id], function(err, result) {
-                if(err) {
-                    res.send(err);
-                }else{
-                    res.send('update success');
-                }
-                connection.release();
-            });
-        });
-    }
-};
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
+
+module.exports = {queryByGoodsid,updateGoods};
