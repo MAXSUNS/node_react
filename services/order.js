@@ -24,7 +24,34 @@ var addOrder=function(goodId,userId) {
     })
 };
 
-var  getOrderByUserId=async function(userId) {
+var  getOrderByUserId= function(userId) {
+    var promise = new Promise(function (resolve, reject) {
+        const orders=[]
+        orderDAO.queryByUserid(userId).then(orderResult=> {
+            logger.log("info", "orderResult update result:"+JSON.stringify(orderResult));
+            var promises = [];
+            orderResult.forEach(async orderInfo=>{
+                promises.push(
+                    orderGoodsDAO.queryByOrderid(orderInfo.id).then(async orderGoodsResult=> {
+                        logger.log("info", "orderGoodsResult result:"+JSON.stringify(orderGoodsResult));
+                        orderInfo['orders']=orderGoodsResult;
+                        orders.push(orderInfo);
+                    })
+                );
+            });
+            Promise.all(promises).then((va) =>{
+                logger.log("info", "345orderGoodsResult result:"+JSON.stringify(orders));
+                resolve(orders)
+            })
+        })
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+};
+
+var  getOrderGoodsByOrderId=async function(orderId) {
     const orders=[]
     orderDAO.queryByUserid(userId).then(orderResult=> {
         logger.log("info", "orderResult update result:"+JSON.stringify(orderResult));
@@ -32,17 +59,17 @@ var  getOrderByUserId=async function(userId) {
         orderResult.forEach(async orderInfo=>{
             promises.push(
                 orderGoodsDAO.queryByOrderid(orderInfo.id).then(async orderGoodsResult=> {
-                logger.log("info", "orderGoodsResult result:"+JSON.stringify(orderGoodsResult));
-                orderInfo['orders']=orderGoodsResult;
-                orders.push(orderInfo);
+                    logger.log("info", "orderGoodsResult result:"+JSON.stringify(orderGoodsResult));
+                    orderInfo['orders']=orderGoodsResult;
+                    orders.push(orderInfo);
                 })
             );
         });
         return Promise.all(promises).then((va) =>{
-            logger.log("info", "345orderGoodsResult result:"+JSON.stringify(orders));
-            return orders
+                logger.log("info", "345orderGoodsResult result:"+JSON.stringify(orders));
+                return orders
             }
         )
     })
 };
-module.exports = {addOrder,getOrderByUserId};
+module.exports = {addOrder,getOrderByUserId,getOrderGoodsByOrderId};
