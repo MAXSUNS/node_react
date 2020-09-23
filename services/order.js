@@ -51,25 +51,4 @@ var  getOrderByUserId= function(userId) {
     return promise;
 };
 
-var  getOrderGoodsByOrderId=async function(orderId) {
-    const orders=[]
-    orderDAO.queryByUserid(userId).then(orderResult=> {
-        logger.log("info", "orderResult update result:"+JSON.stringify(orderResult));
-        var promises = [];
-        orderResult.forEach(async orderInfo=>{
-            promises.push(
-                orderGoodsDAO.queryByOrderid(orderInfo.id).then(async orderGoodsResult=> {
-                    logger.log("info", "orderGoodsResult result:"+JSON.stringify(orderGoodsResult));
-                    orderInfo['orders']=orderGoodsResult;
-                    orders.push(orderInfo);
-                })
-            );
-        });
-        return Promise.all(promises).then((va) =>{
-                logger.log("info", "345orderGoodsResult result:"+JSON.stringify(orders));
-                return orders
-            }
-        )
-    })
-};
-module.exports = {addOrder,getOrderByUserId,getOrderGoodsByOrderId};
+module.exports = {addOrder,getOrderByUserId};
