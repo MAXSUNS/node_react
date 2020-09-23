@@ -29,6 +29,26 @@ var insert= function (userId, consignee,mobile, address) {
     return promise;
 }
 
+var updateAddress= function (orderId, consignee,mobile, address) {
+    var promise = new Promise(function (resolve, reject) {
+        pool.getConnection(function(err, connection) {
+            logger.info(`update order orderId :${orderId}`)
+            connection.query($sql.updateAddress, [consignee,mobile, address,orderId], function(err, result) {
+                connection.release();
+                if(err) {
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
+            });
+        });
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
+
 var  queryByUserid= function (id) {
 
     var promise = new Promise(function (resolve, reject) {
@@ -50,4 +70,4 @@ var  queryByUserid= function (id) {
     return promise;
 }
 
-module.exports = {insert,queryByUserid};
+module.exports = {insert,queryByUserid,updateAddress};

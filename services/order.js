@@ -23,7 +23,17 @@ var addOrder=function(goodId,userId) {
         })
     })
 };
-
+var changeAddress=function(orderId,consignee,mobile,address) {
+    var promise = new Promise(function (resolve, reject) {
+        orderDAO.updateAddress(orderId,consignee,mobile,address).then(orderResult=> {
+        logger.log("info", "changeAddress update result:"+JSON.stringify(orderResult));
+        resolve(orderResult)
+        })
+    });
+    return promise.then(function (value) {
+        return value;
+    }, function (value) {});
+};
 var  getOrderByUserId= function(userId) {
     var promise = new Promise(function (resolve, reject) {
         const orders=[]
@@ -51,4 +61,4 @@ var  getOrderByUserId= function(userId) {
     return promise;
 };
 
-module.exports = {addOrder,getOrderByUserId};
+module.exports = {addOrder,getOrderByUserId,changeAddress};

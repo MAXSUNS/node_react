@@ -12,10 +12,8 @@ orderRouter.get('/', function(req, res, next) {
     logger.log("info", "user query:"+JSON.stringify(req.query));
     let qy = req.query
     orderService.getOrderByUserId(qy.userId).then(ret => {
-        logger.log("info", "123orderGoodsResult result:"+JSON.stringify(ret));
         res.send(ret)
     })
-
     // let result = cache.set(qy.key,qy.info)
     // logger.info("save redis result :"+JSON.stringify(result))
     // cache.get(qy.key).then(function(ret){
@@ -40,6 +38,15 @@ orderRouter.get('/exchange', function(req, res, next) {
         }else {
             res.send("该兑换码已兑换，请确认后重试！");
         }
+    })
+});
+
+/* GET home page. */
+orderRouter.post('/address', function(req, res, next) {
+    logger.log("info", "exchange query:"+JSON.stringify(req.body));
+    let qy = req.body
+    orderService.changeAddress(qy.orderId,qy.consignee,qy.mobile,qy.address).then(ret => {
+        res.send(ret)
     })
 });
 
