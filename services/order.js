@@ -42,15 +42,13 @@ var  getOrderByUserId= function(userId) {
             var promises = [];
             orderResult.forEach(async orderInfo=>{
                 promises.push(
-                    orderGoodsDAO.queryByOrderid(orderInfo.id).then(async orderGoodsResult=> {
-                        logger.log("info", "orderGoodsResult result:"+JSON.stringify(orderGoodsResult));
+                    orderGoodsDAO.queryByOrderid(orderInfo.id).then( orderGoodsResult=> {
                         orderInfo['orders']=orderGoodsResult;
                         orders.push(orderInfo);
                     })
                 );
             });
             Promise.all(promises).then((va) =>{
-                logger.log("info", "345orderGoodsResult result:"+JSON.stringify(orders));
                 resolve(orders)
             })
         })
