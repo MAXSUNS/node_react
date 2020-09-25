@@ -43,10 +43,10 @@ orderRouter.get('/exchange', function(req, res, next) {
 
 /* GET home page. */
 orderRouter.post('/address', function(req, res, next) {
-    logger.log("info", "exchange query:"+JSON.stringify(req.body));
+    logger.log("info", "exchange address:"+JSON.stringify(req.body));
     let qy = req.body
     orderService.changeAddress(qy.orderId,qy.consignee,qy.mobile,qy.address).then(ret => {
-        res.send(ret)
+        res.send("地址修改成功，您可以在订单详情查看。")
     })
 });
 
