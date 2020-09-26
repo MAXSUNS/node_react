@@ -13,20 +13,7 @@ var userRouter = require( './user')
 var orderRouter = require( './order')
 var userToken={}
 var api = new wechatAPI(wx.appid, wx.appsecret);
-const menuConfig = {
-    "button": [
-        {
-            "type": "view",
-            "name": "关于我们",
-            "url": "http://www.sunsd.cn/"
-        },
-        {
-                    "type": "view",
-                    "name": "个人中心",
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wx.appid+"&redirect_uri=http://www.sunsd.cn&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
-        }
-    ]
-};
+const menuConfig = wx.menu;
 
 router.use('/user', userRouter);
 router.use('/order', orderRouter);

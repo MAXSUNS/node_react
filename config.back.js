@@ -11,7 +11,21 @@ var wx ={
   appsecret: 'appsecret',
   token:'token',
   // encodingAESKey:'PLhyMCfZyfWQqwJSHFnZgFH4Z7v1hO3ID3ZGSL57ix',
-  checkSignature: true
+  checkSignature: true,
+  menu:{
+    "button": [
+      {
+        "type": "view",
+        "name": "关于我们",
+        "url": ""
+      },
+      {
+        "type": "view",
+        "name": "个人中心",
+        "url": ""
+      }
+    ]
+  }
 }
 
 var redis ={
