@@ -31,6 +31,15 @@ userRouter.get('/', function(req, res, next) {
     })
 });
 
+userRouter.get('/login', function(req, res, next) {
+    logger.log("info", "user query:"+JSON.stringify(req.query));
+    let qy = req.query
+    userDao.queryByMobile(qy.mobile,qy.passowrd).then(userResult =>{
+        res.send(userResult);
+    })
+    res.send(userInfo);
+});
+
 
 
 module.exports = userRouter;

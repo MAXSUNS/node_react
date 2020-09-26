@@ -59,7 +59,7 @@ var queryAll=function (page,count) {
 
 var queryByOpenid= function (openid) {
     var promise = new Promise(function (resolve, reject) {
-    pool.getConnection(function(err, connection) {
+        pool.getConnection(function(err, connection) {
             connection.query($sql.queryByOpenid, [openid], function(err, result) {
                 connection.release();
                 if(err) {
@@ -74,7 +74,25 @@ var queryByOpenid= function (openid) {
         return value;
     }, function (value) {});
     return promise;
-    }
+}
+var queryByMobile= function (mobile,password) {
+    var promise = new Promise(function (resolve, reject) {
+        pool.getConnection(function(err, connection) {
+            connection.query($sql.queryByMobile, [mobile,password], function(err, result) {
+                connection.release();
+                if(err) {
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
+            });
+        });
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
 var  update= function (userInfo) {
         pool.getConnection(function(err, connection) {
             connection.query($sql.update, [param.name, param.age, +param.id], function(err, result) {
@@ -88,4 +106,4 @@ var  update= function (userInfo) {
         });
     }
 
-module.exports = {update,add,update,queryByOpenid,queryAll};
+module.exports = {update,add,update,queryByOpenid,queryAll,queryByMobile};

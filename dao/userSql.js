@@ -4,6 +4,7 @@ var user = {
     updateMobile:'update litemall_user set mobile=? where id=?',
     delete: 'delete from litemall_user where id=?',
     queryByOpenid: 'select * from litemall_user where weixin_openid=?',
+    queryByMobile: 'select * from litemall_user where mobile=? and password=?',
     queryAll: 'select * from litemall_user limit ?,?'
 };
 
