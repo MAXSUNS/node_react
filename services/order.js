@@ -10,7 +10,7 @@ var addOrder=function(goodId,userId) {
     goodsDAO.queryByGoodsid(goodId).then(goodsResult=> {
         logger.log("info", "queryByGoodsid result:"+JSON.stringify(goodsResult));
         const goodInfo=goodsResult[0]
-        orderDAO.insert(userId,"","","").then(orderResult=> {
+        orderDAO.insert(userId,"","","",goodInfo.retail_price).then(orderResult=> {
             logger.log("info", "orderResult update result:"+JSON.stringify(orderResult));
             const infos=[]
             for (i = 1; i <= goodInfo.number; i++) {

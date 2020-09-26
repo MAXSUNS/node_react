@@ -9,11 +9,11 @@ var pool = mysql.createPool( config.sqlConfig );
 const log4js = require('../utils/log4js');
 const logger = log4js.getLogger();
 
-var insert= function (userId, consignee,mobile, address) {
+var insert= function (userId, consignee,mobile, address,price) {
     var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
             logger.info(`insert order userId :${userId}`)
-            connection.query($sql.insert, [userId,consignee,mobile, address], function(err, result) {
+            connection.query($sql.insert, [userId,consignee,mobile, address,price], function(err, result) {
                 connection.release();
                 if(err) {
                     reject(err);
