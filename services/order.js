@@ -14,7 +14,7 @@ var addOrder=function(goodId,userId) {
             logger.log("info", "orderResult update result:"+JSON.stringify(orderResult));
             const infos=[]
             for (i = 1; i <= goodInfo.number; i++) {
-                const info=[orderResult.insertId,goodId,goodInfo.name,i]
+                const info=[orderResult.insertId,goodId,goodInfo.name,goodInfo.pic_url,"未发货",i]
                 infos.push(info)
             }
             orderGoodsDAO.batchInsert(infos).then(batchInsertResult=> {
