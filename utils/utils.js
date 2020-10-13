@@ -517,5 +517,13 @@ utils.getCurrentPeriod = function(t) {
     }
     return null;
 };
-
+/**
+ * 判断手机号是否合法
+ * @param str
+ * @returns boolean
+ */
+utils.isValidPhone =  function (str) {
+    var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+    return myreg.test(str);
+}
 module.exports = utils;
