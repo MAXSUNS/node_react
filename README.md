@@ -16,7 +16,6 @@ koa
 1. 购物功能
 
 2. 积分功能
-
 ## Build Setup
 
 ``` bash
