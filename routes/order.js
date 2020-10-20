@@ -7,7 +7,6 @@ var cache= require('../utils/cache');
 const exchangeDAO = require('../dao/exchangeDAO');
 const orderService = require('../services/order');
 
-/* GET home page. */
 orderRouter.get('/', function(req, res, next) {
     logger.log("info", "user query:"+JSON.stringify(req.query));
     let qy = req.query
@@ -23,7 +22,6 @@ orderRouter.get('/', function(req, res, next) {
 });
 
 
-/* GET home page. */
 orderRouter.get('/exchange', function(req, res, next) {
     logger.log("info", "exchange query:"+JSON.stringify(req.query));
     let qy = req.query
@@ -41,7 +39,6 @@ orderRouter.get('/exchange', function(req, res, next) {
     })
 });
 
-/* GET home page. */
 orderRouter.post('/address', function(req, res, next) {
     logger.log("info", "exchange address:"+JSON.stringify(req.body));
     let qy = req.body
