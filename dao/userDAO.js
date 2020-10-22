@@ -1,9 +1,7 @@
-var express = require('express');
 var mysql = require('mysql');
 
 var config = require('../config');
 var $sql = require('./userSql');
-
 var pool = mysql.createPool( config.sqlConfig );
 const log4js = require('../utils/log4js');
 const logger = log4js.getLogger();
