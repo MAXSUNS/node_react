@@ -13,7 +13,6 @@ redis = {};
 redis.set = function(key,value){
     value = JSON.stringify(value);
     return redis_client.set(key,value,function(err){
-        //console.log(err);
     });
 };
 text = async(key)=>{
