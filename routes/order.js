@@ -20,7 +20,6 @@ orderRouter.get('/', function(req, res, next) {
     // });
 });
 
-
 orderRouter.get('/exchange', function(req, res, next) {
     logger.log("info", "exchange query:"+JSON.stringify(req.query));
     let qy = req.query
