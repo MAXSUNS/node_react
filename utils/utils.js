@@ -256,7 +256,6 @@ String.prototype.replaceAll = function(sptr, sptr1) {
 utils.mixin = function(target, obj) {
     for (var key in obj) {
         if (target.hasOwnProperty(key)) {
-            //console.info('Don\'t allow override existed prototype method. method: ' + key);
             continue;
         }
         target[key] = obj[key];
