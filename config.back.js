@@ -10,7 +10,6 @@ var wx ={
   appid: 'appid',
   appsecret: 'appsecret',
   token:'token',
-  // encodingAESKey:'PLhyMCfZyfWQqwJSHFnZgFH4Z7v1hO3ID3ZGSL57ix',
   checkSignature: true,
   menu:{
     "button": [
