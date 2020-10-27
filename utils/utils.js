@@ -117,7 +117,6 @@ utils.inMobile = function(req) {
     if (req.headers['user-agent']) {
         inMobile = !!req.headers['user-agent'].toLowerCase().match(/(iphone|ipod|ipad|android)/)
     }
-
     return inMobile;
 };
 
@@ -177,12 +176,10 @@ function cutString(pStr, pLen) {
             }
         }
     }
-
     if (!_ret) {
         _cutString = pStr;
         _ret = true;
     }
-
     if (_cutString.length == _strLen) {
         _cutFlag = "0";
     }
