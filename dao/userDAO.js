@@ -93,7 +93,7 @@ var queryByMobile= function (mobile,password) {
 }
 var  update= function (userInfo) {
         pool.getConnection(function(err, connection) {
-            connection.query($sql.update, [param.name, param.age, +param.id], function(err, result) {
+            connection.query($sql.updateUser, [userInfo.username, userInfo.password, userInfo.id], function(err, result) {
                 if(err) {
                     res.send(err);
                 }else{
