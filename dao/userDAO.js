@@ -36,6 +36,7 @@ var add=function (userInfo) {
     }, function (value) {});
     return promise;
     }
+
 var queryAll=function (page,count) {
     var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
