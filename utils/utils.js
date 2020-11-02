@@ -6,7 +6,6 @@ var url = require('url');
 var querystring = require('querystring');
 var moment = require('moment');
 var sha1 = require('sha1');
-
 var utils = {
     isFunction: function(arg) {
         return typeof arg === 'function';
