@@ -22,6 +22,7 @@ var addOrder=function(goodId,userId) {
         })
     })
 };
+
 var changeAddress=function(orderId,consignee,mobile,address) {
     var promise = new Promise(function (resolve, reject) {
         orderDAO.updateAddress(orderId,consignee,mobile,address).then(orderResult=> {
@@ -33,6 +34,7 @@ var changeAddress=function(orderId,consignee,mobile,address) {
         return value;
     }, function (value) {});
 };
+
 var  getOrderByUserId= function(userId) {
     var promise = new Promise(function (resolve, reject) {
         const orders=[]
