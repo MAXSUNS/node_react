@@ -6,9 +6,11 @@ const redis_client = redis.createClient({host:red.host,port:red.port,ttl:red.ttl
 redis_client.auth('6478**12',function(){
     console.log('auth success');
 });
+
 redis_client.on("error",function(err){
     console.log(err);
 });
+
 redis = {};
 redis.set = function(key,value){
     value = JSON.stringify(value);
