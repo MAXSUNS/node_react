@@ -105,4 +105,5 @@ var  update= function (userInfo) {
         });
     }
 
+    
 module.exports = {update,add,update,queryByOpenid,queryAll,queryByMobile};
