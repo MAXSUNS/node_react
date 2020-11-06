@@ -12,14 +12,7 @@ orderRouter.get('/', function(req, res, next) {
     orderService.getOrderByUserId(qy.userId).then(ret => {
         res.send(ret)
     })
-    // let result = cache.set(qy.key,qy.info)
-    // logger.info("save redis result :"+JSON.stringify(result))
-    // cache.get(qy.key).then(function(ret){
-    //     logger.info("get redis is:"+JSON.stringify(ret))
-    //     res.send(ret);
-    // });
 });
-
 orderRouter.get('/exchange', function(req, res, next) {
     logger.log("info", "exchange query:"+JSON.stringify(req.query));
     let qy = req.query
