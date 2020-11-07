@@ -2,7 +2,6 @@ const log4js = require('../utils/log4js');
 const logger = log4js.getLogger();
 var express = require('express');
 var orderRouter = express.Router();
-var cache= require('../utils/cache');
 const exchangeDAO = require('../dao/exchangeDAO');
 const orderService = require('../services/order');
 
@@ -13,6 +12,7 @@ orderRouter.get('/', function(req, res, next) {
         res.send(ret)
     })
 });
+
 orderRouter.get('/exchange', function(req, res, next) {
     logger.log("info", "exchange query:"+JSON.stringify(req.query));
     let qy = req.query
