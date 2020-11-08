@@ -10,7 +10,6 @@ const {wx} = require('../config');
 const userDao = require('../dao/userDAO');
 
 
-
 /* GET home page. */
 userRouter.get('/', function(req, res, next) {
     logger.log("info", "user query:"+JSON.stringify(req.query));
@@ -39,7 +38,5 @@ userRouter.get('/login', function(req, res, next) {
     })
     res.send(userInfo);
 });
-
-
 
 module.exports = userRouter;
