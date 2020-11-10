@@ -4,7 +4,6 @@ const goodsDAO = require('../dao/goodsDAO');
 const orderDAO = require('../dao/orderDAO');
 const orderGoodsDAO = require('../dao/orderGoodsDAO');
 
-
 var addOrder=function(goodId,userId) {
     goodsDAO.queryByGoodsid(goodId).then(goodsResult=> {
         logger.log("info", "queryByGoodsid result:"+JSON.stringify(goodsResult));
