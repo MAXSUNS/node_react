@@ -92,6 +92,7 @@ var queryByMobile= function (mobile,password) {
     }, function (value) {});
     return promise;
 }
+
 var  update= function (userInfo) {
         pool.getConnection(function(err, connection) {
             connection.query($sql.updateUser, [userInfo.username, userInfo.password, userInfo.id], function(err, result) {
@@ -105,5 +106,5 @@ var  update= function (userInfo) {
         });
     }
 
-    
+
 module.exports = {update,add,update,queryByOpenid,queryAll,queryByMobile};
