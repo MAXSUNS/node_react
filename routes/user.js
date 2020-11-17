@@ -6,7 +6,6 @@ var userRouter = express.Router();
 var {getOauthToken} = require('../services/oauth')
 var getUserInfo = require('../services/wxUserInfo')
 const {wx} = require('../config');
-
 const userDao = require('../dao/userDAO');
 
 
