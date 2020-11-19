@@ -20,7 +20,7 @@ var wx ={
       },
       {
         "type": "view",
-        "name": "个人中心",
+        "name": "兑换中心",
         "url": ""
       }
     ]
