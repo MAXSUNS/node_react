@@ -25,5 +25,27 @@ function getUserInfo(AccessToken, openId) {
         });
     })
 }
+function sendMessageToUser(AccessToken, openId) {
+    let reqUrl = 'https://api.weixin.qq.com/cgi-bin/message/template/send?';
+    let params = {
+        access_token: AccessToken,
+        openid: openId,
+        lang: 'zh_CN'
+    };
 
+    let options = {
+        method: 'get',
+        url: reqUrl+qs.stringify(params)
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options, function (err, res, body) {
+            if (res) {
+                resolve(body);
+            } else {
+                reject(err);
+            }
+        });
+    })
+}
 module.exports = getUserInfo;
