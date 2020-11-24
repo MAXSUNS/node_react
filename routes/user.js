@@ -8,7 +8,6 @@ var getUserInfo = require('../services/wxUserInfo')
 const {wx} = require('../config');
 const userDao = require('../dao/userDAO');
 
-
 /* GET home page. */
 userRouter.get('/', function(req, res, next) {
     logger.log("info", "user query:"+JSON.stringify(req.query));
