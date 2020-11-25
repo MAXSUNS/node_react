@@ -31,12 +31,10 @@ function sendMessageToUser(AccessToken, openId) {
         openid: openId,
         lang: 'zh_CN'
     };
-
     let options = {
         method: 'get',
         url: reqUrl+qs.stringify(params)
     };
-
     return new Promise((resolve, reject) => {
         request(options, function (err, res, body) {
             if (res) {
