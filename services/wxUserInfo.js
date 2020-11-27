@@ -2,7 +2,7 @@
 const request = require('request');
 const qs = require('querystring');
 
-function getUserInfo(AccessToken, openId) {
+var getUserInfo=function(AccessToken, openId) {
     let reqUrl = 'https://api.weixin.qq.com/sns/userinfo?';
     let params = {
         access_token: AccessToken,
@@ -24,7 +24,7 @@ function getUserInfo(AccessToken, openId) {
     })
 }
 
-function sendMessageToUser(AccessToken, openId) {
+var sendMessageToUser=function(AccessToken, openId) {
     let reqUrl = 'https://api.weixin.qq.com/cgi-bin/message/template/send?';
     let params = {
         access_token: AccessToken,
@@ -45,4 +45,5 @@ function sendMessageToUser(AccessToken, openId) {
         });
     })
 }
-module.exports = getUserInfo;
+
+module.exports = {getUserInfo,sendMessageToUser};
