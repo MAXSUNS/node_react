@@ -1,4 +1,5 @@
 const log4js = require('../utils/log4js');
+const utils = require('../utils/utils');
 const logger = log4js.getLogger();
 var express = require('express');
 var orderRouter = express.Router();
@@ -21,8 +22,8 @@ orderRouter.get('/exchange', function(req, res, next) {
         if (result.length>0 && result[0].status===0){
             exchangeDAO.updateExchange(qy.userId,1,qy.code).then(updateResult=> {
                 logger.log("info", "exchange update result:"+JSON.stringify(updateResult));
-                orderService.addOrder(result[0].goods_id,qy.userId)
-                res.send("兑换成功，请在-我的订单-中完善收货信息。");
+                let orderId = orderService.addOrder(result[0].goods_id,qy.userId)
+                res.send(utils.responseForm(orderId));
             })
         }else {
             res.send("该兑换码已兑换，请确认后重试！");

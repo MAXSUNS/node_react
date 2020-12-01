@@ -50,7 +50,6 @@ var updateAddress= function (orderId, consignee,mobile, address) {
 }
 
 var  queryByUserid= function (id) {
-
     var promise = new Promise(function (resolve, reject) {
         pool.getConnection(function(err, connection) {
             logger.info(`order queryByUserid  id:${id}`)
@@ -69,5 +68,24 @@ var  queryByUserid= function (id) {
     }, function (value) {});
     return promise;
 }
+var  queryByOrderid= function (id) {
+    var promise = new Promise(function (resolve, reject) {
+        pool.getConnection(function(err, connection) {
+            logger.info(`order queryByOrderid  id:${id}`)
+            connection.query($sql.queryByOrderid, [id], function(err, result) {
+                connection.release();
+                if(err) {
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
+            });
+        });
+    });
+    promise.then(function (value) {
+        return value;
+    }, function (value) {});
+    return promise;
+}
 
-module.exports = {insert,queryByUserid,updateAddress};
+module.exports = {insert,queryByUserid,updateAddress,queryByOrderid};

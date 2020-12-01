@@ -521,4 +521,13 @@ utils.isValidPhone =  function (str) {
     var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
     return myreg.test(str);
 }
+
+/**
+ * response格式化
+ * @param data
+ * @returns obj
+ */
+utils.responseForm =  function (data,code) {
+    return {"code":code,"data":data};
+}
 module.exports = utils;

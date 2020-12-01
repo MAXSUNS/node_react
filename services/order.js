@@ -18,6 +18,7 @@ var addOrder=function(goodId,userId) {
             orderGoodsDAO.batchInsert(infos).then(batchInsertResult=> {
                 logger.log("info", "orderResult batchInsert result:"+JSON.stringify(batchInsertResult));
             })
+            resolve(orderResult)
         })
     })
 };
