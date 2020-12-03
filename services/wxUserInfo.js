@@ -46,4 +46,5 @@ var sendMessageToUser=function(AccessToken, openId) {
     })
 }
 
+
 module.exports = {getUserInfo,sendMessageToUser};
