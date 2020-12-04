@@ -11,7 +11,6 @@ var add=function (userInfo) {
         pool.getConnection(function(err, connection) {
             logger.info("add user :"+JSON.stringify(userInfo))
             queryByOpenid(userInfo.openid).then(userDb=>{
-                logger.info("search user result:"+JSON.stringify(userDb))
                 logger.info("search user result:"+JSON.stringify(userDb.length))
                 if (userDb.length>0){
                     resolve(userDb[0].id);
