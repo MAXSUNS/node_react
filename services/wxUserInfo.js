@@ -24,6 +24,7 @@ var getUserInfo=function(AccessToken, openId) {
     })
 }
 
+
 var sendMessageToUser=function(AccessToken, openId) {
     let reqUrl = 'https://api.weixin.qq.com/cgi-bin/message/template/send?';
     let params = {
